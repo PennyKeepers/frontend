@@ -1,0 +1,37 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Full height of the viewport */
+}
+
+/* Ensure the content takes as much space as needed but keeps footer at the bottom */
+.dashboard-container > *:not(footer) {
+    flex: 1; /* Make all non-footer content grow/shrink */
+}
+
+.footer {
+    background-color: #1a202c; /* Light gray background */
+    color: #000000; /* Black text for contrast */
+    text-align: center;
+    padding: 20px 10px; /* Add spacing inside the footer */
+    font-size: 16px; /* Adjust font size for readability */
+    min-height: 60px; /* Ensure footer always has a visible height */
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Optional: slight shadow for separation */
+}
+
+.footer p {
+    color: #ffffff !important;
+}
+
+.footer-link {
+    color: #63b3ed; /* Light blue link color for good contrast */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}

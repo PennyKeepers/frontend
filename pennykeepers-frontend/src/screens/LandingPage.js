@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/landing.css";
-import PKLogo from "../assets/PKlogo.png";
+import PKLogo from "../assets/PKLogo.png";
 import Stats from "../assets/Stats.png";
 
 const LandingPage = ({ setPage }) => {

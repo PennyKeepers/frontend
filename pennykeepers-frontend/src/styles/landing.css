@@ -22,6 +22,11 @@
     margin-bottom: -200px;
 }
 
+.underconstruction {
+    width: 400px; /* Adjust for better size */
+    height: auto;
+}
+
 .tagline {
     font-size: 2rem;
     font-weight: 600;
