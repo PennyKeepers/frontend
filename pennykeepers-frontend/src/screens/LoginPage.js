@@ -22,7 +22,7 @@ const LoginPage = ({ setPage }) => {
           Log In
         </button>
         <p>
-          Or click on <a>Sign Up</a> to create a new account
+          Or click on Sign Up to create a new account
         </p>
         <img src={St3} alt="St3 logo" className="St3-image" />
       </div>
