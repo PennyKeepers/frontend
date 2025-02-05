@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
 import "../styles/login.css";
 import St3 from "../assets/St3.png";
+import SignUpPage from "./SignUp";
 
 const LoginPage = ({ setPage }) => {
   const [fadeIn, setFadeIn] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setFadeIn(true);
     }, 100);
   }, []);
+
+  const handleSignUpClick = () => {
+    setIsSignUp(true);
+  };
+
+  if (isSignUp) {
+    return <SignUpPage setPage={setPage} />;
+  }
 
   return (
     <div className={`login-container ${fadeIn ? "fade-in" : ""}`}>
@@ -22,7 +32,7 @@ const LoginPage = ({ setPage }) => {
           Log In
         </button>
         <p>
-          Or click on Sign Up to create a new account
+          Or click on <span onClick={handleSignUpClick}>Sign Up</span> to create a new account
         </p>
         <img src={St3} alt="St3 logo" className="St3-image" />
       </div>
