@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: .
+    container_name: pennykeepers-frontend
+    ports:
+      - "3003:80"  # Maps port 8002 on the host to port 80 in the container
+    restart: unless-stopped
