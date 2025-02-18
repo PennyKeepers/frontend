@@ -6,7 +6,7 @@ const Navbar = ({ setPage }) => {
         <nav className="navbar">
             <h2>Penny Keepers</h2>
             <ul>
-                <li onClick={() => setPage("landing")}>Home</li>
+                <li onClick={() => setPage("About")}>About</li>
                 <li onClick={() => setPage("dashboard")}>Dashboard</li>
                 <li onClick={() => setPage("login")}>Log Out</li>
             </ul>
