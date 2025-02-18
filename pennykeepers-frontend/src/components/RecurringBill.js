@@ -4,19 +4,48 @@ import "../styles/transactions.css";
 export default function RecurringBill({ onReturn }) {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-  const [frequency, setFrequency] = useState('Weekly');
+  const [frequency, setFrequency] = useState('weekly');
+  const [category, setCategory] = useState('0');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
-      description,
+
+    const data = {
+      bill_name: description,
       amount: parseFloat(amount),
       frequency,
-    });
+      category: parseInt(category),
+      start_date: startDate,
+      end_date: endDate,
+    };
 
-    setDescription('');
-    setAmount('');
-    setFrequency('Weekly');
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('/api/recurrent-bills/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log('Bill added successfully');
+        setDescription('');
+        setAmount('');
+        setFrequency('weekly');
+        setCategory('0');
+        setStartDate('');
+        setEndDate('');
+      } else {
+        console.error('Failed to add bill');
+      }
+    } catch (error) {
+      console.error('Error submitting the form:', error);
+    }
   };
 
   return (
@@ -54,11 +83,48 @@ export default function RecurringBill({ onReturn }) {
             onChange={(e) => setFrequency(e.target.value)}
             className="w-full p-2 rounded border shadow bg-[#e0f7ff] text-black focus:outline-none focus:ring-2 focus:ring-blue-300"
           >
-            <option value="Weekly">Weekly</option>
-            <option value="Biweekly">Biweekly</option>
-            <option value="Monthly">Monthly</option>
-            <option value="Yearly">Yearly</option>
+            <option value="weekly">Weekly</option>
+            <option value="biweekly">Biweekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
           </select>
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium">Category</label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full p-2 rounded border shadow bg-[#e0f7ff] text-black focus:outline-none focus:ring-2 focus:ring-blue-300"
+          >
+            <option value="0">Utilities</option>
+            <option value="1">House</option>
+            <option value="2">Subscriptions</option>
+            <option value="3">Car</option>
+            <option value="4">Insurance</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium">Start Date</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="w-full p-2 rounded border shadow bg-[#e0f7ff] text-black focus:outline-none focus:ring-2 focus:ring-blue-300"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium">End Date</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="w-full p-2 rounded border shadow bg-[#e0f7ff] text-black focus:outline-none focus:ring-2 focus:ring-blue-300"
+            required
+          />
         </div>
 
         <button type="submit" className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded w-full">
