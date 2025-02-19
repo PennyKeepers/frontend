@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import '../styles/transactions.css';
+import { API_URL } from "../config"
 
 export default function RecurringIncome({ onReturn }) {
   const [description, setDescription] = useState('');
@@ -30,7 +31,7 @@ export default function RecurringIncome({ onReturn }) {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('/recurrent-incomes/', payload, {
+      const response = await axios.post(`${API_URL}/recurrent-incomes/`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import "../styles/transactions.css";
+import '../styles/transactions.css';
 
 export default function RecurringBill({ onReturn }) {
   const [description, setDescription] = useState('');
@@ -12,28 +12,27 @@ export default function RecurringBill({ onReturn }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = {
+    const payload = {
       bill_name: description,
       amount: parseFloat(amount),
       frequency,
-      category: parseInt(category),
+      category: parseInt(category, 10),
       start_date: startDate,
-      end_date: endDate,
+      end_date: endDate || null,
     };
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/recurrent-bills/', {
-        method: 'POST',
+      const response = await axios.post(`${API_URL}/api/recurrent-bills/`, payload, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(data),
       });
 
       if (response.ok) {
-        console.log('Bill added successfully');
+        console.log('Recurrent bill created successfully');
+        // Reset form
         setDescription('');
         setAmount('');
         setFrequency('weekly');
@@ -41,47 +40,46 @@ export default function RecurringBill({ onReturn }) {
         setStartDate('');
         setEndDate('');
       } else {
-        console.error('Failed to add bill');
+        const errorData = await response.json();
+        console.error('Failed to create recurrent bill:', errorData);
       }
     } catch (error) {
-      console.error('Error submitting the form:', error);
+      console.error('Error creating recurrent bill:', error);
     }
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg border border-gray-300 shadow-lg max-w-md mx-auto">
+    <div className="form-card">
       <h1 className="text-2xl font-bold mb-4">Add Recurring Bill</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block mb-1 font-medium">Description</label>
+          <label className="label">Description</label>
           <input
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full p-2 rounded border shadow bg-[#e0f7ff] text-black placeholder-black focus:outline-none focus:ring-2 focus:ring-blue-300"
-            placeholder="Enter description"
+            className="input-field"
             required
           />
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Amount ($)</label>
+          <label className="label">Amount ($)</label>
           <input
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full p-2 rounded border shadow bg-[#e0f7ff] text-black placeholder-black focus:outline-none focus:ring-2 focus:ring-blue-300"
-            placeholder="Enter amount"
+            className="input-field"
             required
           />
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Frequency</label>
+          <label className="label">Frequency</label>
           <select
             value={frequency}
             onChange={(e) => setFrequency(e.target.value)}
-            className="w-full p-2 rounded border shadow bg-[#e0f7ff] text-black focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="input-field"
           >
             <option value="weekly">Weekly</option>
             <option value="biweekly">Biweekly</option>
@@ -91,11 +89,11 @@ export default function RecurringBill({ onReturn }) {
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Category</label>
+          <label className="label">Category</label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full p-2 rounded border shadow bg-[#e0f7ff] text-black focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="input-field"
           >
             <option value="0">Utilities</option>
             <option value="1">House</option>
@@ -106,28 +104,30 @@ export default function RecurringBill({ onReturn }) {
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Start Date</label>
+          <label className="label">Start Date</label>
           <input
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full p-2 rounded border shadow bg-[#e0f7ff] text-black focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="input-field"
             required
           />
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">End Date</label>
+          <label className="label">End Date (optional)</label>
           <input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="w-full p-2 rounded border shadow bg-[#e0f7ff] text-black focus:outline-none focus:ring-2 focus:ring-blue-300"
-            required
+            className="input-field"
           />
         </div>
 
-        <button type="submit" className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded w-full">
+        <button
+          type="submit"
+          className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded w-full"
+        >
           Submit
         </button>
       </form>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import "../styles/transactions.css";
+import { API_URL } from "../config"
 
 export default function TransactionList({ onReturn }) {
   const [transactions, setTransactions] = useState([]);
@@ -17,7 +18,7 @@ export default function TransactionList({ onReturn }) {
   const fetchTransactions = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('/api/transactions/', {
+      const response = await axios.get(`${API_URL}/api/transactions/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -30,7 +31,8 @@ export default function TransactionList({ onReturn }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newTransaction = {
+    
+    const payload = {
       amount: parseFloat(amount),
       date,
       description,
@@ -40,7 +42,7 @@ export default function TransactionList({ onReturn }) {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('/api/transactions/', newTransaction, {
+      const response = await axios.post('/api/transactions/', payload, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
