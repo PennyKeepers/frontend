@@ -11,26 +11,29 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    padding-top: 100px; /* Increase this value if necessary */
 }
 
 /* Center Content */
 .content-center {
     display: flex;
+    flex-direction: row; /* Ensure text and buttons are side-by-side */
     justify-content: space-between;
     align-items: center;
-    padding: 80px;
+    padding: 80px 20px; /* Adjust padding */
     max-width: 1200px;
     margin: auto;
+    gap: 40px; /* Add spacing */
 }
+
 
 /* Text Section */
 .text-section {
-    flex: 1;
+    flex: 1; /* Makes it take available space */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    margin-left: -80px;
 }
 
 /* Styling for paragraph */
@@ -63,7 +66,6 @@ body {
     flex-direction: column;
     align-items: center;
     max-width: 300px;
-    margin-left: 200px;
 }
 
 /* Button Styles */
@@ -115,4 +117,22 @@ body {
     font-size: 14px;
     color: #555;
 }
+
+@media (max-width: 768px) {
+    .content-center {
+        flex-direction: column; /* Stack items on small screens */
+        align-items: center;
+        text-align: center;
+    }
+
+    .text-section, .buttons-container {
+        margin: 0;
+        align-items: center;
+    }
+
+    .buttons-container {
+        max-width: 100%;
+    }
+}
+
 
