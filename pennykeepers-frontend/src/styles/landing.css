@@ -1,44 +1,41 @@
 .landing-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     height: 100vh;
-    text-align: center;
+    text-align: left;
     background: linear-gradient(to right, #0072ff, #00c6ff);
     color: white;
     font-family: 'Poppins', sans-serif;
-    position: static;
     overflow: hidden;
+    padding: 0 10%;
 }
 
 .content {
-    max-width: 600px;
-    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 50%;
+    margin-top: -180px;
+
 }
 
 .logo {
-    width: 600px; /* Adjust for better size */
+    width: 450px;
     height: auto;
-    margin-left: 200px;
-    margin-bottom: -200px;
-}
-
-.underconstruction {
-    width: 400px; /* Adjust for better size */
-    height: auto;
+    margin-bottom: -70px;
+    margin-left: 50px;
 }
 
 .tagline {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 600;
-    margin-left: 200px;
-    width: 600px;
+    width: 100%;
     margin-bottom: 60px;
     text-align: center;
-}
-
-.highlight {
-    color: #ffffff;
-    font-weight: 700;
+    margin-left: 20px;
+    margin-top: -30px;
 }
 
 .start-btn {
@@ -46,9 +43,9 @@
     color: #0072ff;
     font-size: 1.2rem;
     padding: 12px 30px;
-    margin-left: 380px;
     border: none;
     border-radius: 30px;
+    margin-left: 200px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -60,11 +57,50 @@
 }
 
 .stats-image {
-    position: absolute;
-    bottom: 200px;
-    right: 100px;
-    width: 500px;  /* Adjust size */
+    width: 40vw;
+    max-width: 450px;
     height: auto;
-    z-index: 1;
+    margin-left: 50px;
+}
+
+@media (max-width: 1024px) {
+    .landing-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .content {
+        max-width: 90%;
+        align-items: center;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .logo {
+        width: 60%;
+        max-width: 300px;
+        margin-bottom: -30px;
+        margin-left: 10px;
+    }
+
+    .tagline {
+        font-size: 1.5rem;
+        width: 80%;
+    }
+
+    .start-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+        margin-left: 5px;
+    }
+
+    .stats-image {
+        width: 50vw;
+        max-width: 350px;
+        margin-top: 20px;
+    }
 }
 

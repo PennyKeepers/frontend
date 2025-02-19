@@ -1,38 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
+
+body {
+    font-family: 'Exo 2', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
 .dashboard-container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    padding-top: 100px; /* Increase this value if necessary */
 }
 
-.dashboard-container h1 {
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 10px;
+/* Center Content */
+.content-center {
+    display: flex;
+    flex-direction: row; /* Ensure text and buttons are side-by-side */
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 20px; /* Adjust padding */
+    max-width: 1200px;
+    margin: auto;
+    gap: 40px; /* Add spacing */
 }
 
+
+/* Text Section */
+.text-section {
+    flex: 1; /* Makes it take available space */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Styling for paragraph */
 .dashboard-container p {
     font-size: 20px;
+    font-weight: 500;
     max-width: 600px;
-    line-height: 1.5;
-    color: #000000;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 10px;
+    /* Creates spacing below */
 }
 
-/* Wrapper for centering content */
-.content-center {
+/* Title should follow paragraph closely */
+.dashboard-container h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: #0056b3;
+    margin-top: 0;
+    margin-bottom: 20px/* Removes default spacing for better alignment */
+}
+
+/* Buttons Box */
+.buttons-container {
+    background: #dddddd;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 150px); /* Subtract Navbar and Footer height */
-    flex: 1;
+    max-width: 300px;
 }
 
-.underconstruction {
-    max-width: 80%; /* Prevent image from overflowing */
-    height: auto; /* Maintain aspect ratio */
-    margin-top: 20px; /* Add space between text and image */
+/* Button Styles */
+.dashboard-btn {
+    width: 100%;
+    padding: 18px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 10px 5px 2px;
 }
 
+/* Button Colors */
+.dashboard-btn.transactions {
+    background-color: #3988ef;
+    color: white;
+}
+.dashboard-btn.transactions:hover {
+    background-color: #0056b3;
+}
+
+.dashboard-btn.income {
+    background-color: #3988ef;
+    color: white;
+}
+.dashboard-btn.income:hover {
+    background-color: #0056b3;
+}
+
+.dashboard-btn.bill {
+    background-color: #3988ef;
+    color: white;
+
+}
+.dashboard-btn.bill:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
 .footer {
-    flex-shrink: 0; /* Prevents footer from shrinking */
+    flex-shrink: 0;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    color: #555;
 }
+
+@media (max-width: 768px) {
+    .content-center {
+        flex-direction: column; /* Stack items on small screens */
+        align-items: center;
+        text-align: center;
+    }
+
+    .text-section, .buttons-container {
+        margin: 0;
+        align-items: center;
+    }
+
+    .buttons-container {
+        max-width: 100%;
+    }
+}
+
+

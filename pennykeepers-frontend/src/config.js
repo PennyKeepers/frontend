@@ -1,0 +1,1 @@
+export const API_URL = process.env.REACT_APP_DJANGO_API_URL_BASE || 'http://localhost:8000'
